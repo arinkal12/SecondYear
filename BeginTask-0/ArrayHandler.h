@@ -14,6 +14,7 @@ private:
     long long int _count;
 public:
     ArrayHandler(size_t size = 10) {
+        //
         _size = size;
         _array = new T[_size];
         _max = std::numeric_limits<T>::min();
