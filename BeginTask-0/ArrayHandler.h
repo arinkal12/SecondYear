@@ -56,7 +56,7 @@ public:
     }
 
     T GetMax() {
-        return _max;
+        return _max;// cibk
     }
 
     T GetMin() {
