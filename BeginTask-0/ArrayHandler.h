@@ -11,7 +11,6 @@ private:
     long long int _count;
 public:
     ArrayHandler(size_t size = 10) {
-        //
         _size = size;
         _array = new T[_size];
         _max = std::numeric_limits<T>::min();
@@ -21,40 +20,41 @@ public:
 
     void AppendElem(T elem) {
         if (_count == _size) {
-            _size += 10;
+            _size *= 2;
             T* new_arr = new T[_size];
             std::memcpy(new_arr, _array, _count * sizeof(T));
             delete[] _array;
             _array = new_arr;
         }
         _array[_count] = elem;
-        _count++;
         if (elem > _max) {
             _max = elem;
         }
         if (elem < _min) {
             _min = elem;
         }
+        _count++;
     }
 
     bool IsContains(T elem) {
+        std::sort(_array, _array + _count);
         int l = 0, r = _count - 1;
         while (l <= r) {
-            int mid = l + (r - l) / 2;
-            if (_array[mid] == elem) {
-                return mid;
-            } else if (_array[mid] < elem) {
+            int ind = l + (r - l) / 2;
+            if (_array[ind] == elem) {
+                return true;
+            } else if (_array[ind] < elem) {
                 l = mid + 1;
             } else {
                 r = mid - 1;
             }
         }
-        return -1;
+        return false;
         
     }
 
     T GetMax() {
-        return _max;// cibk
+        return _max;
     }
 
     T GetMin() {
