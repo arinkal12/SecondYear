@@ -8,7 +8,7 @@ private:
     T* _array;
     T _max;
     T _min;
-    long long int _count;
+    size_t _count;
 public:
     ArrayHandler(size_t size = 10) {
         _size = size;
@@ -20,7 +20,7 @@ public:
 
     void AppendElem(T elem) {
         if (_count == _size) {
-            _size *= 2;
+            _size *= 10;
             T* new_arr = new T[_size];
             std::memcpy(new_arr, _array, _count * sizeof(T));
             delete[] _array;
