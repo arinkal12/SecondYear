@@ -44,9 +44,9 @@ public:
             if (_array[ind] == elem) {
                 return true;
             } else if (_array[ind] < elem) {
-                l = mid + 1;
+                l = ind + 1;
             } else {
-                r = mid - 1;
+                r = ind - 1;
             }
         }
         return false;
