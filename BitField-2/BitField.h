@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdint.h>
 
 class BitField {
 private:
@@ -12,6 +13,7 @@ public:
     BitField(size_t len);
     BitField(const BitField& tmp);
     BitField& operator=(const BitField& tmp);
+    BitField() : _sizeBit(0), _memSize(0), _mem(nullptr) {} 
     
     size_t GetLength() const; // Получить количество бит
     void SetBit(size_t n);
