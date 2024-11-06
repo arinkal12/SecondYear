@@ -1,31 +1,32 @@
+#pragma once
+#include <vector>
 #include "BitField.h"
 
 class Set
 {
 private:
-
-    BitField _bitField;
-    size_t _maxPower;
-    
+  size_t _maxPower;       // максимальная мощность множества
+  BitField _bitField; // битовое поле для хранения характеристического вектора
 public:
-    Set(size_t mp);
-    Set(const Set& set);// copy
-    Set(const BitField& bf);
-    //operator BitField();
-    size_t GetMaxPower();
-    void InserElem(uint64_t elem);
-    void DeleteElem(uint64_t elem);
-    bool IsMemder(uint64_t elem);// proverka est elem ili net
+  Set(size_t mp);
+  Set(const Set &s);       // конструктор копирования
+  Set(const BitField &bf); // конструктор преобразования типа
 
-    bool operator==(const Set& tmp);
-    Set& operator=(const Set& tmp);
-    Set& operator+(const Set& tmp);//обьедеинение множеств разной мощности в том числе 
-    Set& operator-(uint64_t elem);// добавления эелементов 
-    Set& operator*(const Set& tmp);// пересечение 
-    Set& operator~(); // доплнение к основному множеству
-
-    friend std::istream& operator>>(std::istream& istr, Set& set);
-    friend std::istream& operator<<(std::istream& istr, const Set& set);
-
+  // доступ к битам
+  size_t GetMaxPower(void) const;     // максимальная мощность множества
+  void InsElem(const uint64_t Elem);       // включить элемент в множество
+  void DelElem(const uint64_t Elem);       // удалить элемент из множества
+  bool IsMember(const uint64_t Elem) const; // проверить наличие элемента в множестве
+  // теоретико-множественные операции
+  bool operator== (const Set &s) const; // сравнение
+  bool operator!= (const Set &s) const; // сравнение
+  Set& operator=(const Set &s);  // присваивание
+  Set operator+ (const uint64_t Elem); // объединение с элементом
+                                   // элемент должен быть из того же универса
+  Set operator- (const uint64_t Elem); // разность с элементом
+                                   // элемент должен быть из того же универса
+  Set operator+ (const Set &s);  // объединение
+  Set operator* (const Set &s);  // пересечение
+  Set operator~ ();           // дополнение
+  std::vector<uint64_t> GetPrimary(); // Выдать простые числа множества
 };
-
